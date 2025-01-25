@@ -4,7 +4,7 @@
 #include <fstream>
 #include <iostream>
 
-#include "Vadder.h"
+#include "VRippleCarryAdder.h"
 #include "verilated_vcd_c.h"
 
 using namespace std;
@@ -21,7 +21,7 @@ using namespace std;
     (signal) = (value);                \
     (dut)->eval();
 
-void test(Vadder* dut, int test_a, int test_b, bool test_cin, bool& pass) {
+void test(VRippleCarryAdder* dut, int test_a, int test_b, bool test_cin, bool& pass) {
     int64_t golden_sum = (int64_t)test_a + (int64_t)test_b + (int64_t)test_cin;
     golden_sum = golden_sum & 0xFFFFFFFF;         // Ensure golden_sum is 32-bit
     bool golden_cout = (golden_sum >> 32) & 0x1;  // Extract the carry-out bit
@@ -46,9 +46,9 @@ int main(int argc, char** argv) {
     Verilated::traceEverOn(true);
     VerilatedVcdC* fp = new VerilatedVcdC();
 
-    auto dut = new Vadder;
+    auto dut = new VRippleCarryAdder;
     dut->trace(fp, 99);
-    fp->open("build/adder_wave.vcd");
+    fp->open("wave/RippleCarryAdder.vcd");
 
     // Test
     test(dut, 5, 3, 0, pass);
@@ -60,19 +60,16 @@ int main(int argc, char** argv) {
     test(dut, 0x7FFFFFFF, 1, 0, pass);
     step(dut, fp, time);
 
-    if (pass) {
-        ifstream inFile("../art/pass.txt");
-        string line;
-        while (getline(inFile, line)) {
-            cout << line << endl;
-        }
-        inFile.close();
-    } else {
-        ifstream inFile("../art/fail.txt");
-        string line;
-        while (getline(inFile, line)) {
-            cout << line << endl;
-        }
-        inFile.close();
+    string path = pass ? "../art/pass.txt" : "../art/fail.txt";
+    ifstream in_file(path);
+    string line;
+    while (getline(in_file, line)) {
+        cout << line << endl;
     }
+    in_file.close();
+
+    fp->close();
+    dut->final();
+    delete dut;
+    return pass ? EXIT_SUCCESS : EXIT_FAILURE;
 }

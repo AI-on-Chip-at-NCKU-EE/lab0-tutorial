@@ -1,7 +1,4 @@
-
-// `include ".src/full_adder.sv"
-
-module adder (
+module RippleCarryAdder (
     input logic [31:0] a,
     input logic [31:0] b,
     input logic cin,
@@ -16,7 +13,7 @@ assign c[0] = cin;
 genvar i;
 generate
     for (i = 0; i < 32; i++) begin : adder_gen
-        full_adder fa (
+        FullAdder fa (
             .a(a[i]),
             .b(b[i]),
             .cin(c[i]),

@@ -9,7 +9,7 @@
 #include <thread>
 #include <vector>
 
-#include "Vtrafficlight_ctrl.h"
+#include "VTrafficLightController.h"
 #include "verilated_vcd_c.h"
 
 using namespace std;
@@ -69,7 +69,7 @@ void set_golden(vector<bool>& red_golden, vector<bool>& yellow_golden, vector<bo
 }
 
 // Show a traffic light with red, yellow, green lights on or off
-void showTrafficLight(Vtrafficlight_ctrl* dut) {
+void showTrafficLight(VTrafficLightController* dut) {
     clearScreen();
     if (dut->en == 0) {
         cout << "Watch out !!! Traffic light is disabled!" << endl;
@@ -104,7 +104,7 @@ void showTrafficLight(Vtrafficlight_ctrl* dut) {
     }
 }
 
-void check(Vtrafficlight_ctrl* dut, vector<bool>& red_golden, vector<bool>& yellow_golden, vector<bool>& green_golden,
+void check(VTrafficLightController* dut, vector<bool>& red_golden, vector<bool>& yellow_golden, vector<bool>& green_golden,
            vector<int>& lefttime_golden, int& count, bool& pass) {
     cout << "Time: " << (20 - count) << " Expected: red = " << red_golden[21 - count]
          << ", yellow = " << yellow_golden[21 - count] << ", green = " << green_golden[21 - count]
@@ -132,7 +132,7 @@ int main() {
 
     Verilated::traceEverOn(true);
     VerilatedVcdC* fp = new VerilatedVcdC();
-    auto dut = new Vtrafficlight_ctrl;
+    auto dut = new VTrafficLightController;
     dut->trace(fp, 99);
     fp->open("build/trafficlight_wave.vcd");
     set_signal(dut, dut->rst, 1);

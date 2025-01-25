@@ -4,7 +4,7 @@
 #include <fstream>
 #include <iostream>
 
-#include "Vfull_adder.h"
+#include "VFullAdder.h"
 #include "verilated_vcd_c.h"
 
 using namespace std;
@@ -28,9 +28,9 @@ int main(int argc, char** argv) {
     Verilated::traceEverOn(true);
     VerilatedVcdC* fp = new VerilatedVcdC();
 
-    auto dut = new Vfull_adder;
+    auto dut = new VFullAdder;
     dut->trace(fp, 99);
-    fp->open("build/full_adder_wave.vcd");
+    fp->open("wave/FullAdder.vcd");
 
     // Test all possible input combinations for a full adder
     for (int a = 0; a < 2; a++) {
@@ -59,24 +59,16 @@ int main(int argc, char** argv) {
             }
         }
     }
-    if (pass) {
-        ifstream inFile("../art/pass.txt");
-        string line;
-        while (getline(inFile, line)) {
-            cout << line << endl;
-        }
-        inFile.close();
-    } else {
-        ifstream inFile("../art/fail.txt");
-        string line;
-        while (getline(inFile, line)) {
-            cout << line << endl;
-        }
-        inFile.close();
+    string path = pass ? "../art/pass.txt" : "../art/fail.txt";
+    ifstream in_file(path);
+    string line;
+    while (getline(in_file, line)) {
+        cout << line << endl;
     }
+    in_file.close();
 
     fp->close();
     dut->final();
     delete dut;
-    return 0;
+    return pass ? EXIT_SUCCESS : EXIT_FAILURE;
 }

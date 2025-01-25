@@ -1,4 +1,4 @@
-module trafficlight_ctrl (
+module TrafficLightController (
     input clk,
     input rst,
     input en,
@@ -10,7 +10,7 @@ module trafficlight_ctrl (
     output logic green,
     output logic [5:0] left_time
 );
-    typedef enum logic [1:0] { 
+    typedef enum logic [1:0] {
         IDLE, RED, YELLOW, GREEN
      } state_t;
     state_t cs, ns;
@@ -47,7 +47,7 @@ module trafficlight_ctrl (
         endcase
     end
 
-    always_ff @( posedge clk or posedge rst ) begin 
+    always_ff @( posedge clk or posedge rst ) begin
         if (rst) begin
             red_time <= 'd0;
             yellow_time <= 'd0;
@@ -79,7 +79,7 @@ module trafficlight_ctrl (
             end
         end
     end
-    
+
     assign red = (cs == RED);
     assign yellow = (cs == YELLOW);
     assign green = (cs == GREEN);
