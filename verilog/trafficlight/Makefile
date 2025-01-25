@@ -11,6 +11,7 @@ all: $(BIN0)
 wave:
 	mkdir -p $@
 
+run: tb0
 tb0: $(BIN0) | wave
 	./$<
 
