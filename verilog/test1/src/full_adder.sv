@@ -5,7 +5,7 @@ module full_adder (
     output logic sum,
     output logic cout
 );
-    // Implement this module using gate-level Verilog
+    // Implement this module using gate-level Verilolg
     
     logic xor1, xor2, and1, and2, and3;
 

@@ -60,7 +60,6 @@ int main(int argc, char** argv) {
     test(dut, 0x7FFFFFFF, 1, 0, pass);
     step(dut, fp, time);
 
-    cout << "---------------------------------" << endl;
     if (pass) {
         ifstream inFile("../art/pass.txt");
         string line;

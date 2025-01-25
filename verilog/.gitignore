@@ -1,3 +1,9 @@
 logs/
-build/
+*.vcd
+*.fsdb
 obj_dir/
+BSSLib.lib++/
+nWaveLog/
+*.rc
+*.conf
+vfastLog/

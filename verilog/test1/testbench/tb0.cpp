@@ -59,7 +59,6 @@ int main(int argc, char** argv) {
             }
         }
     }
-    cout << "---------------------------------" << endl;
     if (pass) {
         ifstream inFile("../art/pass.txt");
         string line;

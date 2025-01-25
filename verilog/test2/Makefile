@@ -1,8 +1,4 @@
-# SRC = $(wildcard ./src/*.sv)
-SRC1 = ./src/full_adder.sv 
-
-SRC2 = ./src/full_adder.sv \
-    ./src/adder.sv
+SRC = $(wildcard ./src/*.sv)
 
 
 ifeq ($(VERILATOR_ROOT),)
@@ -32,10 +28,13 @@ VERILATOR_FLAGS += --trace
 VERILATOR_FLAGS += --trace-max-array 1024
 
 # Include the source directory 
-VERILATOR_FLAGS += -I/home/aoc2025/m16134012/AOC2025/lab0/verilog/test1/src
+VERILATOR_FLAGS += -I/home/aoc2025/m16134012/AOC2025/lab0/verilog/test2/src
 
 # Ignore fatal warnings
 VERILATOR_FLAGS += --Wno-fatal
+
+VERILATOR_INPUT = $(SRC) ./testbench/test.cpp
+SIM_EXEC = obj_dir/Vtrafficlight_ctrl
 
 # Run Verilator in debug mode
 # VERILATOR_FLAGS += --debug
@@ -43,11 +42,9 @@ VERILATOR_FLAGS += --Wno-fatal
 LOG_FILE ?= logs/terminal_text.log
 
 ######################################################################
-default: all
+default: run
 
-.PHONY: all
-all: tb0 tb1
-
+.PHONY: run
 run:
 	@echo
 	@echo "-- Verilator Start"
@@ -67,26 +64,6 @@ run:
 	@echo "To see waveforms, open adder_wave.vcd in a waveform viewer"
 	@echo
 
-######################################################################
-
-# Specific Testbench Targets
-# Pass TB_select as a parameter to the simulation executable
-.PHONY: tb0 tb1
-
-tb0: VERILATOR_INPUT = $(SRC1) ./testbench/tb0.cpp
-tb0: SIM_EXEC = obj_dir/Vfull_adder
-tb0: LOG_FILE = logs/terminal_text_tb0.log
-tb0: run
-	@chmod 666 ./testbench/tb0.cpp
-
-tb1: VERILATOR_FLAGS += --top-module adder
-tb1: VERILATOR_INPUT = $(SRC2) ./testbench/tb1.cpp
-tb1: SIM_EXEC = obj_dir/Vadder
-tb1: LOG_FILE = logs/terminal_text_tb1.log
-tb1: run
-	@chmod 666 ./testbench/tb_tb1.cpp
-
-######################################################################
 # Other targets
 
 format:
