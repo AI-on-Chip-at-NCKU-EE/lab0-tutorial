@@ -7,3 +7,4 @@ nWaveLog/
 *.rc
 *.conf
 vfastLog/
+.vscode/

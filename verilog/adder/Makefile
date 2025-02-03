@@ -2,7 +2,7 @@ BIN0 = obj_dir/VFullAdder
 BIN1 = obj_dir/VRippleCarryAdder
 
 INCLUDE := -Isrc
-VFLAGS := -Wall --cc --exe --build --trace
+VFLAGS := --Wno-UNOPTFLAT --cc --exe --build --trace 
 VC := verilator
 
 .PHONY: all clean format run
