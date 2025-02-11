@@ -134,7 +134,7 @@ int main() {
     VerilatedVcdC* fp = new VerilatedVcdC();
     auto dut = new VTrafficLightController;
     dut->trace(fp, 99);
-    fp->open("build/trafficlight_wave.vcd");
+    fp->open("wave/trafficlight_wave.vcd");
     set_signal(dut, dut->rst, 1);
     set_signal(dut, dut->clk, 0);
     step(dut, fp, time);

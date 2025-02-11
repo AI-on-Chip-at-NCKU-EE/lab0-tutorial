@@ -4,7 +4,7 @@ INCLUDE := -Isrc
 VFLAGS := -Wall --cc --exe --build --trace
 VC := verilator
 
-.PHONY: all clean format
+.PHONY: all clean format run wave
 
 all: $(BIN0)
 
