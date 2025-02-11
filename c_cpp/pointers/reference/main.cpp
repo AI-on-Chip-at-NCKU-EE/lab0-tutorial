@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
-int main()
-{
+
+int main() {
     int a = 10;
     int &ref = a; // ref is a reference to a
     cout << "Before modification: a = " << a << endl;
