@@ -10,7 +10,7 @@ Bob is developing a smart home device simulator to model smart devices processin
 
 #### 1. Complete the Implementation
 
-Fill in the missing parts of the following class methods:
+Fill in the missing parts of the following class methods in `lab0/python/smart_device/main.py`:
 
 - `device_name` (getter and setter) in the `SmartDevice` class.
 - callback property in the `SmartDevice` class.

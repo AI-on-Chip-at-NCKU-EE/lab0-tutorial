@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Callable
 
+
 # Abstract class for smart devices
 class SmartDevice(ABC):
     def __init__(self, device_name: str, callback: Callable[[str, str], None]):
@@ -26,6 +27,7 @@ class SmartDevice(ABC):
     def operate(self, command):
         pass
 
+
 class LightDevice(SmartDevice):
     def operate(self, command: str):
         if command.lower() == "on":
@@ -34,8 +36,9 @@ class LightDevice(SmartDevice):
             result = "Turn OFF"
         else:
             result = "Invalid command."
-        
+
         self.callback(self.device_name, result)
+
 
 class TVDevice(SmartDevice):
     def operate(self, command: int):
@@ -43,12 +46,14 @@ class TVDevice(SmartDevice):
             result = f"Switched to channel {command}"
         else:
             result = "Invalid channel."
-        
+
         self.callback(self.device_name, result)
+
 
 # Callback function for smart devices
 def device_status(device_name, message):
     print(f"[{device_name}] {message}")
+
 
 # Creating devices
 light = LightDevice("Light", device_status)
@@ -67,6 +72,7 @@ light.operate("on")
 tv.operate(1)
 tv.operate(0)
 
+
 def is_prime(num):
     if num < 2:
         return False
@@ -74,6 +80,7 @@ def is_prime(num):
         if num % i == 0:
             return False
     return True
+
 
 channels = [i for i in range(1, 50) if is_prime(i)]
 for channel in channels:
