@@ -1,15 +1,15 @@
 #include <iostream>
 #include "VCounter.h"
-#include "verilated_vcd_c.h"
+#include "verilated_fst_c.h"
 
 
 int main() {
     Verilated::traceEverOn(true);
-    VerilatedVcdC* fp = new VerilatedVcdC();
-
+    VerilatedFstC* fp = new VerilatedFstC();
+    
     auto dut = new VCounter;
     dut->trace(fp, 0);
-    fp->open("wave.vcd");
+    fp->open("wave.fst");
 
     int clk = 0;
     const int maxclk = 10;

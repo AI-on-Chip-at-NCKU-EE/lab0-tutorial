@@ -1,7 +1,7 @@
 TB_SRC = testbench.cc
 BIN = obj_dir/VCounter
 
-VFLAGS = -Wall --cc --exe --build --trace
+VFLAGS = -Wall --cc --exe --build --trace-fst
 VC = verilator
 
 .PHONY: all clean format run
@@ -18,4 +18,4 @@ format:
 	clang-format -i tb/*.cpp
 
 clean:
-	$(RM) -rv obj_dir *.vcd
+	$(RM) -rv obj_dir *.fst

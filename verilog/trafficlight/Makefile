@@ -1,7 +1,7 @@
 BIN0 = obj_dir/VTrafficLightController
 
 INCLUDE := -Isrc
-VFLAGS := -Wall --cc --exe --build --trace
+VFLAGS := -Wall --cc --exe --build --trace-fst
 VC := verilator
 
 .PHONY: all clean format run wave

@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "VRippleCarryAdder.h"
-#include "verilated_vcd_c.h"
+#include "verilated_fst_c.h"
 
 using namespace std;
 
@@ -44,11 +44,11 @@ int main(int argc, char** argv) {
     bool pass = true;
 
     Verilated::traceEverOn(true);
-    VerilatedVcdC* fp = new VerilatedVcdC();
+    VerilatedFstC* fp = new VerilatedFstC();
 
     auto dut = new VRippleCarryAdder;
     dut->trace(fp, 99);
-    fp->open("wave/RippleCarryAdder.vcd");
+    fp->open("wave/RippleCarryAdder.fst");
 
     // Test
     test(dut, 5, 3, 0, pass);

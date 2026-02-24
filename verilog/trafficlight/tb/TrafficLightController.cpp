@@ -10,7 +10,7 @@
 #include <vector>
 
 #include "VTrafficLightController.h"
-#include "verilated_vcd_c.h"
+#include "verilated_fst_c.h"
 
 using namespace std;
 #define CYCLE 10
@@ -131,10 +131,10 @@ int main() {
     int time = 0;
 
     Verilated::traceEverOn(true);
-    VerilatedVcdC* fp = new VerilatedVcdC();
+    VerilatedFstC* fp = new VerilatedFstC();
     auto dut = new VTrafficLightController;
     dut->trace(fp, 99);
-    fp->open("wave/trafficlight_wave.vcd");
+    fp->open("wave/trafficlight_wave.fst");
     set_signal(dut, dut->rst, 1);
     set_signal(dut, dut->clk, 0);
     step(dut, fp, time);

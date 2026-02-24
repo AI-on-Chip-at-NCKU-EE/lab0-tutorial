@@ -5,7 +5,7 @@
 #include <iostream>
 
 #include "VFullAdder.h"
-#include "verilated_vcd_c.h"
+#include "verilated_fst_c.h"
 
 using namespace std;
 
@@ -26,11 +26,11 @@ int main(int argc, char** argv) {
     bool pass = true;
 
     Verilated::traceEverOn(true);
-    VerilatedVcdC* fp = new VerilatedVcdC();
+    VerilatedFstC* fp = new VerilatedFstC();
 
     auto dut = new VFullAdder;
     dut->trace(fp, 99);
-    fp->open("wave/FullAdder.vcd");
+    fp->open("wave/FullAdder.fst");
 
     // Test all possible input combinations for a full adder
     for (int a = 0; a < 2; a++) {
